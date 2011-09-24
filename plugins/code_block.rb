@@ -52,13 +52,14 @@ module Jekyll
         markup = markup.strip.sub(/lang:\w+/i,'')
       end
 
-      if markup =~ /\s+(.+?)(https?:\/\/\S+)\s*(.+)?/i
+      if markup =~ /(.+?)(https?:\/\/\S+)\s*(.+)?/i
         @title     = $1
         @link_href = $2
         @link_name = $3
-      elsif markup =~ /\s*(.+)?/i
+      elsif markup =~ /(.+)?/i
         @title     = $1
       end
+      @title.strip! if @title
       super
     end
 
@@ -70,7 +71,7 @@ module Jekyll
         :title     => @title,
         :link_href => @link_href,
         :link_name => @link_name || 'download'
-      }).render
+      }).render(context)
     end
   end
 end

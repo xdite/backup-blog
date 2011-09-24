@@ -58,7 +58,7 @@ $ rm -rf ~/PAIN
 $ rm -rf ~/PAIN
 {% endcodeblock %}
 
-{% codeblock Lorem ipsum lang:sh %}
+{% codeblock Lorem ipsum lang:sh http://example.com/myfilename.sh %}
 $ rm -rf ~/PAIN
 {% endcodeblock %}
 

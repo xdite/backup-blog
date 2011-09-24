@@ -59,7 +59,7 @@ module Jekyll
         :title     => @title,
         :link_href => "/#{code_dir}/#{@link_href}",
         :link_name => 'download'
-      }).render
+      }).render(context)
     end
   end
 

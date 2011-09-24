@@ -1,6 +1,9 @@
 require './plugins/pygments_code'
+require './plugins/raw'
+
 class CodeBlockHighlighter
   include HighlightCode
+  include TemplateWrapper
 
   def initialize(code, metadata = {})
     @code = code
@@ -25,7 +28,14 @@ class CodeBlockHighlighter
     end
   end
 
-  def render
-    "<figure class='code'>#{render_caption()}#{render_code()}</figure>"
+  def render(context = nil)
+    code = render_code()
+    if context
+      code = safe_wrap(code)
+      # FIXME: Inserts newlines around markdown code which leads to empty <p> tags between <figcaption> and code
+      #code = context['pygments_prefix'] << code if context['pygments_prefix']
+      #code = code << context['pygments_suffix'] if context['pygments_suffix']
+    end
+    "<figure class='code'>#{render_caption()}#{code}</figure>"
   end
 end
