@@ -32,9 +32,8 @@ class CodeBlockHighlighter
     code = render_code()
     if context
       code = safe_wrap(code)
-      # FIXME: Inserts newlines around markdown code which leads to empty <p> tags between <figcaption> and code
-      #code = context['pygments_prefix'] << code if context['pygments_prefix']
-      #code = code << context['pygments_suffix'] if context['pygments_suffix']
+      code = context['pygments_prefix'].strip << code if context['pygments_prefix']
+      code = code << context['pygments_suffix'].strip if context['pygments_suffix']
     end
     "<figure class='code'>#{render_caption()}#{code}</figure>"
   end
